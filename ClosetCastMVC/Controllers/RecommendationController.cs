@@ -76,6 +76,14 @@ namespace ClosetCastMVC.Controllers
                                     (c.Category != "Outerwear" && c.Category != "Shoes"))
                         .ToList();
                 }
+                // if it is dry outside, skip rain gear (rain boots, umbrella, etc.)
+                // warm waterproof items (level 4-5) are winter gear, so keep those
+                else
+                {
+                    items = items
+                        .Where(c => !c.IsWaterproof || c.WarmthLevel >= 4)
+                        .ToList();
+                }
 
                 // Step 4: Pick today's outfit and build the ViewModel
                 List<ClothingItem> outfit =
