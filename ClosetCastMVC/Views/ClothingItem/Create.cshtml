@@ -1,0 +1,112 @@
+@model ClothingItem
+
+
+<div class="container card px-5 shadow-lg col-md-8">
+
+    <h1>Add New Clothing Item</h1>
+
+    <form asp-action="Create">
+
+        <div class="row mb-3">
+            <label asp-for="Name" class="col-md-2 col-form-label"></label>
+
+            <div class="col-md-10">
+
+                <input asp-for="Name" class="form-control" />
+
+            </div>
+
+        </div>
+
+
+        <div class="row mb-3">
+            <label asp-for="Description" class="col-md-2 col-form-label"></label>
+
+            <div class="col-md-10">
+
+                <input asp-for="Description" class="form-control" />
+
+            </div>
+
+        </div>
+
+
+        <div class="row mb-3">
+            <label asp-for="Category" class="col-md-2 col-form-label"></label>
+
+            <div class="col-md-10">
+
+                <select asp-for="Category" class="form-select">
+                    <option value="Top">Top</option>
+                    <option value="Bottom">Bottom</option>
+                    <option value="Outerwear">Outerwear</option>
+                    <option value="Shoes">Shoes</option>
+                    <option value="Accessory">Accessory</option>
+                </select>
+
+            </div>
+
+        </div>
+
+
+        <div class="row mb-3">
+            <label asp-for="DatePurchased" class="col-md-2 col-form-label"></label>
+
+            <div class="col-md-10">
+
+                <input asp-for="DatePurchased" class="form-control" />
+
+            </div>
+
+        </div>
+
+
+        <div class="row mb-3">
+            <label asp-for="WarmthLevel" class="col-md-2 col-form-label"></label>
+
+            <div class="col-md-10">
+
+                <select asp-for="WarmthLevel" class="form-select">
+                    <option value="1">1 - Very Light (80°F and up)</option>
+                    <option value="2">2 - Light (65-79°F)</option>
+                    <option value="3">3 - Medium (50-64°F)</option>
+                    <option value="4">4 - Warm (35-49°F)</option>
+                    <option value="5">5 - Very Warm (below 35°F)</option>
+                </select>
+
+            </div>
+
+        </div>
+
+
+        <div class="row mb-3">
+            <label asp-for="IsWaterproof" class="col-md-2 col-form-label"></label>
+            <div class="col-md-10">
+                <input asp-for="IsWaterproof" class="form-check-input mt-2" />
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <label asp-for="Price" class="col-md-2 col-form-label"></label>
+
+            <div class="col-md-10">
+
+                <input asp-for="Price" class="form-control" />
+
+            </div>
+
+        </div>
+
+
+        <div class="mb-3">
+
+            <button type="submit" class="btn btn-outline-success w-100">Save</button>
+
+        </div>
+
+
+
+    </form>
+
+
+</div>

@@ -1,0 +1,118 @@
+@model List<ClothingItem>
+
+
+<h1>My Closet</h1>
+
+<a asp-controller="ClothingItem" asp-action="Create" class="btn btn-success mb-3">Add New Clothing Item</a>
+
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Item Name</th>
+            <th>Description</th>
+            <th>Category</th>
+            <th>Warmth Level</th>
+            <th>Waterproof</th>
+            <th>Date Purchased</th>
+            <th>Price</th>
+            <th></th>
+
+        </tr>
+
+    </thead>
+
+    <tbody>
+
+        @foreach(var item in Model)
+        {
+            <tr>
+                <td>
+                    <a asp-controller="ClothingItem" asp-action="Details" asp-route-id="@item.ClothingItemId">
+                        @item.Name
+                    </a>
+                </td>
+                <td>@item.Description</td>
+                <td>@item.Category</td>
+                <td>@item.WarmthLevel</td>
+                <td>@(item.IsWaterproof ? "Yes" : "No")</td>
+                <td>@item.DatePurchased.ToShortDateString()</td>
+                <td>@string.Format("{0:c}", item.Price)</td>
+
+                <td>
+
+                    <a asp-controller="ClothingItem" asp-action="Details" asp-route-id="@item.ClothingItemId">View Details</a>
+                    <a asp-controller="ClothingItem" asp-action="Edit" asp-route-id="@item.ClothingItemId">Edit</a>
+
+                    <a asp-controller="ClothingItem" asp-action="Delete" asp-route-id="@item.ClothingItemId">Delete</a>
+
+                </td>
+            </tr>
+        }
+
+    </tbody>
+
+</table>
+
+<br/>
+<br/>
+
+
+<form asp-action="Index">
+
+    <div class="row">
+
+        <div class="col-md-2">
+            <label>Keyword</label>
+            <input type="text" name="searchTerm" value="@ViewData["searchTerm"]" class="form-control" placeholder="Search by keyword.."/>
+
+        </div>
+
+
+        <div class="col-md-2">
+            <label>Category</label>
+            <input type="text" name="categoryName" value="@ViewData["category"]" class="form-control" placeholder="Search by Category.." />
+
+        </div>
+
+
+        <div class="col-md-2">
+            <label>Min Price</label>
+            <input type="number" step="0.01" name="minPrice" value="@ViewData["minPrice"]" class="form-control" />
+
+        </div>
+
+        <div class="col-md-2">
+            <label>Max Price</label>
+            <input type="number" step="0.01" name="maxPrice" value="@ViewData["maxPrice"]" class="form-control" />
+
+        </div>
+
+        <div class="col-md-2">
+            <label>Purchased After</label>
+            <input type="date" name="purchasedAfter" value="@ViewData["PurchasedAfterSearch"]" class="form-control" />
+
+        </div>
+
+        <div class="col-md-2">
+            <label>Purchased Before</label>
+            <input type="date" name="purchasedBefore" value="@ViewData["PurchasedBeforeSearch"]" class="form-control" />
+
+        </div>
+
+
+        <div class="col-md-2">
+            <button type="submit" class="btn btn-primary form-control">Search</button>
+
+        </div>
+
+        <div class="col-md-2">
+            <a asp-controller="ClothingItem" asp-action="Index" class="btn btn-secondary form-control">Clear</a>
+
+        </div>
+
+
+    </div>
+
+
+</form>
+

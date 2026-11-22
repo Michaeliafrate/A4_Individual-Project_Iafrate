@@ -1,0 +1,191 @@
+@model ClosetCastMVC.Models.RecommendationViewModel
+
+@{
+    ViewData["Title"] = "Your Outfit for Today";
+}
+
+<div class="container mt-5">
+
+    <div class="text-center mb-4">
+        <h1>Your Outfit for Today</h1>
+
+        <h4 class="text-muted">
+            Weather in @Model.SelectedCity
+        </h4>
+    </div>
+
+    <!-- Weather Information -->
+    <div class="card shadow p-4 mb-4">
+
+        <h3>Weather Forecast</h3>
+
+        <p>
+            <strong>City:</strong>
+            @Model.Weather.City
+        </p>
+
+        <p>
+            <strong>Temperature:</strong>
+            @Model.Weather.Temperature °@Model.Weather.TemperatureUnit
+        </p>
+
+        <p>
+            <strong>Weather Conditions:</strong>
+            @Model.Weather.WeatherCondition
+        </p>
+
+        <p>
+            <strong>Precipitation Probability:</strong>
+            @(Model.Weather.PrecipitationProbability.HasValue
+                ? $"{Model.Weather.PrecipitationProbability}%"
+                : "Unavailable")
+        </p>
+
+        <p>
+            <strong>Wind Speed:</strong>
+            @Model.Weather.WindSpeed
+        </p>
+
+        <p>
+            <strong>Forecast Date:</strong>
+            @Model.Weather.ForecastDate.ToShortDateString()
+        </p>
+
+    </div>
+
+    <!-- What the weather means for your clothes -->
+    <div class="card shadow p-4 mb-4">
+
+        <h3>What to Wear</h3>
+
+        <p>
+            <strong>Warmth Level Needed:</strong>
+            @Model.WarmthLevel out of 5
+        </p>
+
+        <p>
+            <strong>Waterproof Jacket and Shoes Needed:</strong>
+            @(Model.NeedsWaterproof ? "Yes" : "No")
+        </p>
+
+        <p>
+            <strong>Categories to Wear:</strong>
+            @string.Join(", ", Model.RecommendedCategories)
+        </p>
+
+        <h5>Outfit Tips</h5>
+
+        <ul>
+            @foreach (var tip in Model.OutfitTips)
+            {
+                <li>@tip</li>
+            }
+        </ul>
+
+    </div>
+
+    <!-- Today's Outfit -->
+    <div class="card shadow p-4 mb-4">
+
+        <h3>Today's Outfit</h3>
+
+        @if (Model.TodaysOutfit.Any())
+        {
+            <div class="row">
+
+                @foreach (var item in Model.TodaysOutfit)
+                {
+                    <div class="col-md-4 mb-3">
+
+                        <div class="card h-100">
+
+                            <div class="card-body">
+
+                                <h5 class="card-title">
+                                    @item.Name
+                                </h5>
+
+                                <p>
+                                    <strong>Category:</strong>
+                                    @item.Category
+                                </p>
+
+                                <p>
+                                    <strong>Description:</strong>
+                                    @item.Description
+                                </p>
+
+                                <p>
+                                    <strong>Warmth Level:</strong>
+                                    @item.WarmthLevel
+                                </p>
+
+                                <p>
+                                    <strong>Waterproof:</strong>
+                                    @(item.IsWaterproof ? "Yes" : "No")
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+                }
+
+            </div>
+        }
+        else
+        {
+            <p>
+                Nothing in your closet matches today's weather.
+                Try adding more clothes!
+            </p>
+        }
+
+    </div>
+
+    <!-- Other Options -->
+    <div class="card shadow p-4 mb-4">
+
+        <h3>Other Items That Work Today</h3>
+
+        @if (Model.OtherOptions.Any())
+        {
+            <table class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th>Item Name</th>
+                        <th>Category</th>
+                        <th>Warmth Level</th>
+                        <th>Waterproof</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.OtherOptions)
+                    {
+                        <tr>
+                            <td>@item.Name</td>
+                            <td>@item.Category</td>
+                            <td>@item.WarmthLevel</td>
+                            <td>@(item.IsWaterproof ? "Yes" : "No")</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+        else
+        {
+            <p>No other items match today's weather.</p>
+        }
+
+    </div>
+
+    <div class="text-center">
+        <a asp-controller="Recommendation"
+           asp-action="Index"
+           class="btn btn-primary">
+            Search Another City
+        </a>
+    </div>
+
+</div>

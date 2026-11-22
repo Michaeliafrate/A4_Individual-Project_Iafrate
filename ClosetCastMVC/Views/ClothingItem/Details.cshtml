@@ -1,0 +1,60 @@
+@model ClothingItem
+
+<h3>Clothing Item Details</h3>
+
+<hr/>
+
+<div>
+    <dl class="row">
+        <dt class="col-md-4">
+            @Html.DisplayNameFor(Model => Model.Name)
+        </dt>
+        <dd class="col-md-8">
+            @Html.DisplayFor(Model => Model.Name)
+        </dd>
+
+        <dt class="col-md-4">
+            @Html.DisplayNameFor(Model => Model.Description)
+        </dt>
+        <dd class="col-md-8">
+            @Html.DisplayFor(Model => Model.Description)
+        </dd>
+
+        <dt class="col-md-4">
+            @Html.DisplayNameFor(Model => Model.Category)
+        </dt>
+        <dd class="col-md-8">
+            @Html.DisplayFor(Model => Model.Category)
+        </dd>
+
+        <dt class="col-md-4">
+            @Html.DisplayNameFor(Model => Model.DatePurchased)
+        </dt>
+        <dd class="col-md-8">
+            @Html.DisplayFor(Model => Model.DatePurchased)
+        </dd>
+
+        <dt class="col-md-4">
+            @Html.DisplayNameFor(Model => Model.WarmthLevel)
+        </dt>
+        <dd class="col-md-8">
+            @Html.DisplayFor(Model => Model.WarmthLevel)
+        </dd>
+
+        <dt class="col-md-4">
+            @Html.DisplayNameFor(Model => Model.IsWaterproof)
+        </dt>
+        <dd class="col-md-8">
+            @(Model.IsWaterproof ? "Yes" : "No")
+        </dd>
+
+        <dt class="col-md-4">
+            @Html.DisplayNameFor(Model => Model.Price)
+        </dt>
+        <dd class="col-md-8">
+            @Html.DisplayFor(Model => Model.Price)
+        </dd>
+    </dl>
+</div>
+
+<a asp-controller="ClothingItem" asp-action="Index">Back to My Closet</a>
